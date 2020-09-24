@@ -8,6 +8,6 @@
 </head>
 <body>
     <h1>Oto twój bilet:</h1>
-    <span>Z miasta
+    <span>Cena: <?php echo $price; ?>zł</span>
 </body>
 </html>

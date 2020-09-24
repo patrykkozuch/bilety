@@ -13,7 +13,7 @@ if(!isset($_POST['startingPoint']) || !isset($_POST['endingPoint']))
     $x2 = $endingPoint[0]; $y2 = $endingPoint[1];
 
     $distance = ( ($x2 - $x1) ** 2 + ( cos( $x1 * pi() / 180 ) * ( $y2 - $y1 )) ** 2 ) ** 0.5 * 40075.704 / 360;
-    $price = $distance * $pricePerKM;
+    $price = round($distance * $pricePerKM,2);
 
     include('price.php');
 }

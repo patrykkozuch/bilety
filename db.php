@@ -2,5 +2,5 @@
 $server = 'localhost';
 $user = 'root';
 $password = 'root';
-$db_name = 'transport';
+$db_name = 'bilety';
 ?>
