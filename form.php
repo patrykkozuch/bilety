@@ -8,14 +8,25 @@
 </head>
 <body>
     <form method="POST" action="index.php">
-        <input type="text" name="Tekst" id="">
         <select name="startingPoint">
-            <option value="54.366667 18.633333">Gdańsk</option>
-            <option value="54.466667 17.016667">Słupsk</option>
+            <?php $cities = selectCities();
+                foreach ($cities as $city)
+                {
+            ?>
+                <option value="<?php echo $city['CityID']; ?>"><?php echo $city['CityName']; ?></option>
+            <?php
+                }
+            ?>
         </select>
         <select name="endingPoint">
-            <option value="54.366667 18.633333">Gdańsk</option>
-            <option value="54.466667 17.016667">Słupsk</option>
+            <?php $cities = selectCities();
+                foreach ($cities as $city)
+                {
+            ?>
+                <option value="<?php echo $city['CityID']; ?>"><?php echo $city['CityName']; ?></option>
+            <?php
+                }
+            ?>
         </select>
         <input type="submit" value="Znajdź połączenie"/>
     </form>

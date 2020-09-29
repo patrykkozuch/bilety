@@ -1,21 +1,18 @@
 <?php
-//require_once('functions.php');
+require_once('functions.php');
+$startingPoint = $_POST['startingPoint'] ?? NULL;
+$endingPoint = $_POST['endingPoint'] ?? NULL;
 
-if(!isset($_POST['startingPoint']) || !isset($_POST['endingPoint']))
+if((!$startingPoint || !$endingPoint) || ($endingPoint == $startingPoint) && $endingPoint != NULL)
 {
+    if($endingPoint == $startingPoint && $endingPoint != NULL) $error = "Wybierz dwa różne miasta";
+    
+    if(isset($error)) echo $error;
     include('form.php');
 } else {
-    $pricePerKM = 25;
-    $startingPoint = explode(' ',$_POST['startingPoint']);
-    $endingPoint = explode(' ',$_POST['endingPoint']);
-
-    $x1 = $startingPoint[0]; $y1 = $startingPoint[1];
-    $x2 = $endingPoint[0]; $y2 = $endingPoint[1];
-
-    $distance = ( ($x2 - $x1) ** 2 + ( cos( $x1 * pi() / 180 ) * ( $y2 - $y1 )) ** 2 ) ** 0.5 * 40075.704 / 360;
-    $price = round($distance * $pricePerKM,2);
-
-    include('price.php');
+    $coordinates = getCoordinates($_POST['startingPoint'],$_POST['endingPoint']);
+    echo calculatePrice($coordinates, 0.4);
+    //include('price.php');
 }
 
 
