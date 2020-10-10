@@ -3,7 +3,7 @@
 require_once("db.php");
 
 //Utworzenie połączenia do bazy dancyh
-$db = new mysqli($host, $user, $password, $db_name);
+$db = new mysqli($server, $user, $password, $db_name);
 
 if($db->connect_errno)
     die("Błąd połączenia z bazą danych");
@@ -72,7 +72,7 @@ function getCoordinates($startingPointID, $endingPointID)
             if($result->num_rows == 2)
             {
                 while($row = $result->fetch_assoc())
-                    $coordinates[] = array('y' => $row['latitude'], 'x' => $row['longitude']);
+                    $coordinates[] = array('x' => $row['longitude'], 'y' => $row['latitude']);
                 return $coordinates;
             }
         } else throw new Exception;
