@@ -21,7 +21,7 @@
         </select>
         <select name="endingPoint">
 
-            <?php foreach ($cities as $city) : ?>
+            <?php foreach ( $cities as $city ) : ?>
                 <option value="<?php echo $city['CityID']; ?>"><?php echo $city['CityName']; ?></option>
             <?php endforeach; ?>
 
