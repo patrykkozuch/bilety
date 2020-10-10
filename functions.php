@@ -1,13 +1,24 @@
 <?php
+//Pobranie danych logowania do bazy z pliku db.php
 require_once("db.php");
+
+//Utworzenie połączenia do bazy dancyh
 $db = new mysqli($host, $user, $password, $db_name);
+
 if($db->connect_errno)
     die("Błąd połączenia z bazą danych");
 
+
+/* 
+    Pobranie listy miast z bazy
+*/
 function selectCities() {
+    //Użycie zdefiniowanego wcześniej połączenia z bazą
     global $db;
+
     $query = 'SELECT CityID, CityName FROM cities ORDER BY CityName ASC';
     $cities = [];
+
     try {
         if($result = $db->query($query)) {
             if($result->num_rows > 0)
@@ -24,8 +35,13 @@ function selectCities() {
     }
 }
 
+
+/*
+    Obliczanie ceny na podstawie tablicy wspołrzednych wygenerowanej przy użyciu funkcji getCoordinates
+*/
 function calculatePrice($coordinates, $pricePerKM)
 {
+    //Sprawdzenie poprawności danych wejściowych
     if(!is_array($coordinates) || count($coordinates) != 2) return 0;
 
     $x1 = $coordinates[0]['x'];
@@ -39,8 +55,12 @@ function calculatePrice($coordinates, $pricePerKM)
     return $price;
 }
 
+/*
+    Pobranie współrzednych dwóch wybranych miast z bazy
+*/
 function getCoordinates($startingPointID, $endingPointID)
 {
+    //Użycie wcześniej zdefiniowanego połączenia z bazą
     global $db;
 
     $query = "SELECT latitude, longitude FROM cities WHERE CityID = '$startingPointID' OR CityID = '$endingPointID'";

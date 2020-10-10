@@ -8,26 +8,27 @@
 </head>
 <body>
     <form method="POST" action="index.php">
+
+        <!-- Pobranie listy miast z bazy -->
+        <?php if( $cities = selectCities() ) : ?>
+
         <select name="startingPoint">
-            <?php $cities = selectCities();
-                foreach ($cities as $city)
-                {
-            ?>
+
+            <?php foreach ( $cities as $city ) : ?>
                 <option value="<?php echo $city['CityID']; ?>"><?php echo $city['CityName']; ?></option>
-            <?php
-                }
-            ?>
+            <?php endforeach; ?>
+
         </select>
         <select name="endingPoint">
-            <?php $cities = selectCities();
-                foreach ($cities as $city)
-                {
-            ?>
+
+            <?php foreach ($cities as $city) : ?>
                 <option value="<?php echo $city['CityID']; ?>"><?php echo $city['CityName']; ?></option>
-            <?php
-                }
-            ?>
+            <?php endforeach; ?>
+
         </select>
+        
+        <?php endif; ?>
+
         <input type="submit" value="Znajdź połączenie"/>
     </form>
 </body>
