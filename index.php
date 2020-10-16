@@ -32,9 +32,10 @@ if( !$startingPoint || !$endingPoint || isset($error) )
     //Pobranie współrzędnych z bazy
     $coordinates = getCoordinates($startingPoint, $endingPoint);
 
+    //Obliczenie odległości
     $distance = calculateDistance($coordinates);
 
-    //Wyświetlenie ceny
+    //Wyświetlenie ofert
     include( 'offer.php' );
 }
 
