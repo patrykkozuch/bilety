@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 10 Paź 2020, 23:18
+-- Czas generowania: 16 Paź 2020, 12:54
 -- Wersja serwera: 10.4.13-MariaDB
 -- Wersja PHP: 7.4.8
 
@@ -56,6 +56,28 @@ INSERT INTO `cities` (`CityID`, `CityName`, `longitude`, `latitude`) VALUES
 (15, 'Lublin', 51.14, 22.34),
 (16, 'Rzeszów', 50.02, 22);
 
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `tickets`
+--
+
+CREATE TABLE `tickets` (
+  `ticketID` int(11) NOT NULL,
+  `cityFrom` int(11) NOT NULL,
+  `cityWhere` int(11) NOT NULL,
+  `distance` float NOT NULL,
+  `time` text NOT NULL,
+  `price` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `tickets`
+--
+
+INSERT INTO `tickets` (`ticketID`, `cityFrom`, `cityWhere`, `distance`, `time`, `price`) VALUES
+(9, 4, 12, 424.81, '00:47', 7.5);
+
 --
 -- Indeksy dla zrzutów tabel
 --
@@ -67,6 +89,14 @@ ALTER TABLE `cities`
   ADD PRIMARY KEY (`CityID`);
 
 --
+-- Indeksy dla tabeli `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`ticketID`),
+  ADD KEY `cityWhere` (`cityWhere`),
+  ADD KEY `cityFrom` (`cityFrom`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -75,6 +105,23 @@ ALTER TABLE `cities`
 --
 ALTER TABLE `cities`
   MODIFY `CityID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT dla tabeli `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `ticketID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `tickets`
+--
+ALTER TABLE `tickets`
+  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`cityWhere`) REFERENCES `cities` (`CityID`),
+  ADD CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`cityFrom`) REFERENCES `cities` (`CityID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

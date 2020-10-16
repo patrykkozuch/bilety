@@ -1,0 +1,15 @@
+.text-white {
+    color: $white !important;
+}
+
+.m-bt-40 {
+    margin-bottom: 40px !important; 
+    margin-top: 40px !important;
+}
+.move-up {
+    transition: 0.2s;
+    
+    &:hover {
+        transform: translateY(-10px);
+    }
+}
